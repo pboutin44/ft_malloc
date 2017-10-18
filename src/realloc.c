@@ -6,7 +6,7 @@
 /*   By: pboutin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 20:55:06 by pboutin           #+#    #+#             */
-/*   Updated: 2017/10/17 21:40:17 by pboutin          ###   ########.fr       */
+/*   Updated: 2017/10/18 22:18:10 by pboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,28 @@ void		*realloc_norm(t_norm_reall *norm)
 void		*realloc(void *ptr, size_t size)
 {
 	char			letter;
-	t_norm_reall	*norm;
+	t_norm_reall	norm;
 
-	norm->ptr = ptr;
-	norm->size = size;
-	norm->i = 0;
-	letter = identify_letter(norm->ptr);
-	if (norm->ptr == NULL)
-		return (malloc(norm->size));
-	if (letter == 't' && norm->size < 64)
+	norm.ptr = ptr;
+	norm.size = size;
+	norm.i = 0;
+	letter = identify_letter(norm.ptr);
+	if (norm.ptr == NULL)
+		return (malloc(norm.size));
+	if (letter == 't' && norm.size < 64)
 	{
-		if (find_browsetiny(norm->ptr) != NULL)
-			return (norm->ptr);
+		if (find_browsetiny(norm.ptr) != NULL)
+			return (norm.ptr);
 		else
 			return (NULL);
 	}
-	else if (letter == 's' && norm->size < 1025)
+	else if (letter == 's' && norm.size < 1025)
 	{
-		if (find_browsesmall(norm->ptr) != NULL)
-			return (norm->ptr);
+		if (find_browsesmall(norm.ptr) != NULL)
+			return (norm.ptr);
 		else
 			return (NULL);
 	}
 	else
-		return (realloc_norm(norm));
+		return (realloc_norm(&norm));
 }
